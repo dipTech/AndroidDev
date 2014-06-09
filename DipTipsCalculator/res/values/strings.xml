@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Tip Calculator</string>
+    <string name="action_settings">Settings</string>
+    <string name="billTotal">Total Bill: </string>
+    <string name="tip">Tip (%)</string>
+    <string name="split">Contributor: </string>
+    <string name="total">Total</string>
+    <string name="custom">Tip Selector</string>
+    <string name="zero">0.00</string>
+    <string name="totalToPay">Total to Pay: </string>
+    <string name="totalTip">Total Tip: </string>
+    <string name="totalPerPerson">Total Per Person: </string>
+    <string name="tipLabel10">10%</string>
+    <string name="tipLabel15">15%</string>
+    <string name="tipLabel20">20%</string>
+    <string name="tipLabel5">5%</string>
+    <string name="noOfDefaultSplitter">1</string>
+    
+</resources>
