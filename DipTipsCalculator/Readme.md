@@ -16,7 +16,7 @@ Version
 1.0
 
 
-Time spent
+Time Spent
 ==
 3 hours spent in total
 
