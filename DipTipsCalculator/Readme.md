@@ -20,7 +20,7 @@ Time spent
 ==
 3 hours spent in total
 
-User stories:
+User Stories
 -----------
 * User is displayed the tip of specified percentage for specified entered amount
 * User enters the total amount of the transaction
