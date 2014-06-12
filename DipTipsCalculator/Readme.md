@@ -38,7 +38,4 @@ CodePath
 
 Demo
 ---
-https://github.com/dipTech/AndroidDev/blob/master/DipTipsCalculator/DipTipCalculator.gif
-
-
-
+![alt tag](https://github.com/dipTech/AndroidDev/blob/master/DipTipsCalculator/DipTipCalculator.gif)
