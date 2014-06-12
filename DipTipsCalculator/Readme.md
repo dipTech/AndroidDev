@@ -16,11 +16,11 @@ Version
 1.0
 
 
-Time Spent
+Time spent
 ==
 3 hours spent in total
 
-User Stories
+User stories:
 -----------
 * User is displayed the tip of specified percentage for specified entered amount
 * User enters the total amount of the transaction
@@ -38,4 +38,4 @@ CodePath
 
 Demo
 ---
-[![Alt Tip Calculator Demo](https://github.com/dipTech/AndroidDev/blob/master/DipTipsCalculator/DipTipCalculator.gif)
+![Tip Calculator Demo](https://github.com/dipTech/AndroidDev/blob/master/DipTipsCalculator/DipTipCalculator.gif)
