@@ -51,6 +51,5 @@ CodePath
 
 Demo
 ---
-Demo
 ---
 ![Image Search Demo](DipImageSearch.gif)
