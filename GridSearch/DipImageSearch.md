@@ -17,7 +17,7 @@ Creator [Dipankar]  Date [18th June, 2014]
 * Search filters are stored in file store and subsequent searches will use the saved filters for future   search, till options again modified by end users.
 * User can tap on any image in results to see the image in another activity.
 * User can scroll down “infinitely” to continue loading more image results.
----
+
 
 > Enhancement
 =============
