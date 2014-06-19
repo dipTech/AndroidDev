@@ -24,7 +24,6 @@ Creator [Dipankar]  Date [18th June, 2014]
 * Error handling to check if internet is available - network failure.
 * Improve the user interface with styling and coloring.
 * User can zoom or pan images displayed in full-screen detail view
------
 
 Version
 ----
@@ -41,11 +40,8 @@ Somehow my R file is lost and I cannot bring it back. So have to develop a new a
 
 User stories:
 -----------
-1. This application searches images.
-2. Just input query and press button to execute your search.
-3. Several options are available in menu invoked by top right gear icon button.
-4. Available Setting Options mentioned above.
-5. Tapping one of the results of your search invokes an enlarged thumbnail.
+This application searches images. User just input query and press button to execute your search. Several options are available in menu invoked by top right gear icon button. Available Setting Options mentioned above. Tapping one of the results of your search invokes an enlarged thumbnail.
+
 * N.B: The enlarged image is not perfect and may not satisfy user experience.
 * Implemented by SmartImageView, will provide better enlargement in next version.
 
