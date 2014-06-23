@@ -3,3 +3,25 @@ AndroidDev
 
 code path android dev 
 Twitter credential check https://dev.twitter.com/docs/api/1.1/get/account/verify_credentials
+
+Get the new entry
+-----------------
+public void onSuccess(JSONObject json){
+  aTweets.insert(newTweet, 0);
+  listview.setSelection(0);
+  aTweets.notifyDataSetChanged();
+
+}
+
+Autolink
+--------
+http://stackoverflow.com/questions/7895852/autolink-in-listitem
+http://stackoverflow.com/questions/12863662/convertview-loses-onitemclick-after-the-listview-is-scrolled
+
+remoteId is the id from the server assigned to the object. It can be any type that maps to the type assigned by the server. Might be a long for twitter.
+http://guides.codepath.com/android/ActiveAndroid-Guide  easy ORM
+
+Disable Dialog Title
+--------------------
+dialog.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+WindowManager.LayoutParams.FLAG_FULLSCREEN);
