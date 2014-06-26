@@ -5,25 +5,23 @@ User can enter a search query that will display a grid of image results retreive
 
 Creator [Dipankar]  Date [18th June, 2014]
 
-> Mandatory Implementation
+> Implementation
 ==========================
-* Basic feature to search query using Google Image Search API.
-* User can click on "settings" icon (right on Action Bar) which allows selection of advanced search       options to filter results.
-* Configurable advanced search filters using spinner, such as:
-    Size (small, medium, large, extra-large)
-    Color filter (black, blue, brown, gray, green, etc...)
-    Type (faces, photo, clip art, line art)
-    Site (yahoo.com)
-* Search filters are stored in file store and subsequent searches will use the saved filters for future   search, till options again modified by end users.
-* User can tap on any image in results to see the image in another activity.
-* User can scroll down “infinitely” to continue loading more image results.
+*   User can sign in to Twitter using OAuth login.
+*   User can view the tweets from their home timeline.
+*   User should be able to see the username, name, body for each tweet.
+*   User should see the relative timestamp for a tweet "8m", "7h".
+*   User can view more tweets as they scroll with infinite pagination.
+*   User can compose a new tweet by clicking a “Compose” icon in the Action Bar on the top right ("+" sign).
+*   User can then enter a new tweet and post this to twitter.
+*   User is taken back to home timeline with new tweet visible in timeline.
+*   Error handling to check if internet is disconnected and retreive from database schema.
 
+> Still Working
+*   Links in tweets are clickable and will launch the web browser (see autolink)
 
-> Enhancement
-=============
-* Error handling to check if internet is available - network failure.
-* Improve the user interface with styling and coloring.
-* User can zoom or pan images displayed in full-screen detail view
+> Problem
+*   When internet is disconnected, the user image don't show always - need to solve it.
 
 Version
 ----
@@ -34,16 +32,10 @@ Time spent
 ==
 2 days spent in total. 
 
-Reason for unexpected work delay
-=====
-Somehow my R file is lost and I cannot bring it back. So have to develop a new application again.
 
 User stories:
 -----------
-This application searches images. User just input query and press button to execute your search. Several options are available in menu invoked by top right gear icon button. Available Setting Options mentioned above. Tapping one of the results of your search invokes an enlarged thumbnail.
-
-* N.B: The enlarged image is not perfect and may not satisfy user experience.
-* Implemented by SmartImageView, will provide better enlargement in next version.
+This Twitter Client Application helps user to secure login to their Twitter timeline view. User can post new tweet and view the updated timeline.
 
 License
 ----
@@ -52,4 +44,4 @@ CodePath
 Demo
 ---
 ---
-![Image Search Demo](DipImageSearch.gif)
+![Image Search Demo](TwitterTimeline.gif)
