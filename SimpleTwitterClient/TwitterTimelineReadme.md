@@ -1,7 +1,7 @@
 Twitter Client
 ==============
 
-Twitter client which displays the home timeline and can compose a tweet.
+Twitter client displays the home timeline and can compose a tweet.
 
 Creator [Dipankar]  Date [25th June, 2014]
 
