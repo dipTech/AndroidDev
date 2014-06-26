@@ -1,9 +1,9 @@
-Grid Image Search
-=========
+Twitter Client
+==============
 
-User can enter a search query that will display a grid of image results retreived by the Google Image Search API.
+Twitter client which displays the home timeline and can compose a tweet.
 
-Creator [Dipankar]  Date [18th June, 2014]
+Creator [Dipankar]  Date [25th June, 2014]
 
 > Implementation
 ==========================
@@ -34,7 +34,7 @@ Time spent
 
 
 User stories:
------------
+-------------
 This Twitter Client Application helps user to secure login to their Twitter timeline view. User can post new tweet and view the updated timeline.
 
 License
