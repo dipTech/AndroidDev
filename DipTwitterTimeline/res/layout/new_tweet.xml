@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/btnTweet"
+    android:layout_width="500dp"
+    android:layout_height="fill_parent"
+    android:layout_margin="16dp"
+    android:background="#E2F1FB" 
+    android:orientation="vertical">
+
+    <EditText
+        android:id="@+id/etNewTweet"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:background="@android:drawable/editbox_background_normal"
+        android:hint="@string/enter_new_tweet"
+        android:lines="3"
+        android:inputType="textMultiLine">
+
+        <requestFocus />
+    </EditText>
+
+    <Button
+        android:id="@+id/btnSubmitTweet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/btnTweetCancel"
+        android:layout_alignBottom="@+id/btnTweetCancel"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="50dp"
+        android:text="@string/newTweetButton" />
+
+    <Button
+        android:id="@+id/btnTweetCancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/etNewTweet"
+        android:layout_marginLeft="22dp"
+        android:layout_toRightOf="@+id/btnSubmitTweet"
+        android:text="@string/cancel" />
+
+</RelativeLayout>
