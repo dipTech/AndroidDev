@@ -21,11 +21,7 @@ Creator [Dipankar]  Date [25th June, 2014]
 *   User can click on the profile image in any tweet to see another user's profile and reply.
 *   User can delete his tweet.
 *   Links in tweets are clickable and will launch the web browser.
-
-> Still Working
-*   Error handling for internet connection still needs work.
-*   Retweet is disabled, need to fix it.
-*   Somehow missed - User can see picture, tagline, # of followers, # of following, and tweets of clicked user, will fix it.
+*   User can see profile, # of followers, # of following, and tweets of clicked user, and can communicate.
 
 From last assignment try to align the objects on layout properly.
 
@@ -50,4 +46,4 @@ CodePath
 Demo
 ---
 ---
-![Image Search Demo](TwitterTimeline.gif)
+![Image Search Demo](TwitterTimeline1.gif)
