@@ -27,7 +27,7 @@ Creator [Dipankar]  Date [25th June, 2014]
 *   Retweet is disabled, need to fix it.
 *   Somehow missed - User can see picture, tagline, # of followers, # of following, and tweets of clicked user, will fix it.
 
-From last assignment try to assign the objects on layout properly.
+From last assignment try to align the objects on layout properly.
 
 Version
 ----
