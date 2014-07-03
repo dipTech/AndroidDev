@@ -71,7 +71,7 @@
             android:paddingLeft="10dp" />
 
         <Button
-            android:id="@+id/dvReyweetB"
+            android:id="@+id/dvRetweetB"
             style="?android:attr/buttonStyleSmall"
             android:layout_width="40dp"
             android:layout_height="40dp"
@@ -79,12 +79,75 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/dvReplyLinearLayout"
+        android:id="@+id/llTweetFavorite"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignRight="@+id/dvActionBarLinearLayout"
         android:layout_below="@+id/dvActionBarLinearLayout"
+        android:layout_marginTop="10dp" >
+
+        <TextView
+            android:id="@+id/tv_RTcount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="8dp"
+            android:text="4"
+            android:textSize="10sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_RTLable"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="16dp"
+            android:text="@string/retweet_button_label"
+            android:textColor="@color/help_color"
+            android:textSize="10sp" />
+
+        <TextView
+            android:id="@+id/tv_FavoriteCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="8dp"
+            android:text="4"
+            android:textSize="10sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_FavoriteLable"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/following_button_label"
+            android:textColor="@color/help_color"
+            android:textSize="10sp" />
+
+        <TextView
+            android:id="@+id/tv_FollowCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:text="4"
+            android:textSize="10sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_FollowLable"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/followers_button_label"
+            android:textColor="@color/help_color"
+            android:textSize="10sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/dvReplyLinearLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignRight="@+id/llTweetFavorite"
+        android:layout_below="@+id/llTweetFavorite"
         android:layout_marginTop="10dp"
         android:background="@color/blue" >
 
@@ -101,7 +164,7 @@
             android:lines="4"
             android:maxLength="140"
             android:scrollbars="vertical"
-            android:textAppearance="?android:attr/textAppearanceSmall" >
+            android:textSize="10sp" >
 
             <requestFocus />
         </EditText>

@@ -16,5 +16,6 @@
     <color name="background_grey">#0f000000</color>
     <color name="base_action_bar">#BDEDFF</color>
     <color name="button_blue">#bf6d7b8d</color>
+    <color name="help_color">#808080</color>
 
 </resources>

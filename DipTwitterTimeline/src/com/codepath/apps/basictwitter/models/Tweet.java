@@ -43,13 +43,11 @@ public class Tweet extends Model implements Serializable {
 	@Column(name = "uid", unique = true, onUniqueConflict = Column.ConflictAction.REPLACE)
 	private long uid;
 	@Column(name = "retweet_count")
-	private int retweet_count;
+	private long retweet_count;
 	@Column(name = "favourites_count")
 	private int favourites_count;
 	@Column(name = "retweeted")
 	private boolean retweeted;
-	@Column(name = "retweetCount")
-	private int retweetCount;
     @Column(name = "favorited")
 	private boolean favorited;
     @Column(name = "mediaUrl")
@@ -87,7 +85,7 @@ public class Tweet extends Model implements Serializable {
 			tweet.createdAt = json.getString("created_at");
 			tweet.user = User.fromJSON(json.getJSONObject("user"));
 			tweet.userId = tweet.user.getUid();
-			tweet.retweetCount = json.getInt("retweet_count");
+			tweet.retweet_count = json.getLong("retweet_count");
 			tweet.favorited = json.getBoolean("favorited");
 			
 			try {
@@ -236,10 +234,6 @@ public class Tweet extends Model implements Serializable {
 		this.handle = handle;
 	}
 
-	public void setRetweetCount(int retweetCount) {
-		this.retweetCount = retweetCount;
-	}
-
 	public void setFavorited(boolean favorited) {
 		this.favorited = favorited;
 	}
@@ -253,20 +247,34 @@ public class Tweet extends Model implements Serializable {
 	}
 
 	public String getRelativeTimeAgo() {
-		String twitterFormat = "EEE MMM dd HH:mm:ss ZZZZZ yyyy";
-		SimpleDateFormat sf = new SimpleDateFormat(twitterFormat, Locale.ENGLISH);
-		sf.setLenient(true);
-
-		String relativeDate = "";
 		try {
-			long dateMillis = sf.parse(createdAt).getTime();
-			relativeDate = DateUtils.getRelativeTimeSpanString(dateMillis,
-					System.currentTimeMillis(), DateUtils.FORMAT_ABBREV_ALL).toString();
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
+			long currentTime = System.currentTimeMillis();
+			long diff = currentTime
+					- simpleDateFormat.parse(createdAt).getTime();
+			if (diff > 0) {
+				int time = (int) (diff / 1000);
+				String t = simpleDateFormat.format(createdAt);
 
-		return relativeDate;
+				if (time < 60) {
+					t = String.valueOf(time) + "s";
+				} else if (time < 60 * 60) {
+					t = String.valueOf(time / 60) + "m";
+				} else if (time < 60 * 60 * 24) {
+					t = String.valueOf(time / 3600) + "h";
+				} else if (time < 60 * 60 * 24 * 10) {
+					t = String.valueOf(time / (3600 * 24)) + "d";
+				} else {
+					long millis = simpleDateFormat.parse(createdAt).getTime();
+					t = DateUtils.getRelativeTimeSpanString(millis,
+							System.currentTimeMillis(),
+							DateUtils.SECOND_IN_MILLIS).toString();
+				}
+				return t;
+			} 
+		} catch (ParseException e) {
+			Log.d("twit", e.getMessage());
+		}
+		return ("Now");
 	}
 	
 	public static Tweet getTweetById(long tweetId){
@@ -299,10 +307,6 @@ public class Tweet extends Model implements Serializable {
 		this.tweetId = id;
 	}
 
-	public int getRetweetCount() {
-		return retweetCount;
-	}
-
 	public String getName() {
 		return name;
 	}
@@ -323,11 +327,11 @@ public class Tweet extends Model implements Serializable {
 		return simpleDateFormat;
 	}
 
-	public int getRetweet_count() {
+	public long getRetweet_count() {
 		return retweet_count;
 	}
 
-	public void setRetweet_count(int retweet_count) {
+	public void setRetweet_count(long retweet_count) {
 		this.retweet_count = retweet_count;
 	}
 

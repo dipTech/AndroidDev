@@ -12,8 +12,8 @@ import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -31,7 +31,7 @@ public class TweetArrayAdapter extends ArrayAdapter<Tweet> {
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		Tweet tweet = getItem(position);
+		final Tweet tweet = getItem(position);
 		View v;
 		if (convertView == null) {
 			LayoutInflater inflator = LayoutInflater.from(getContext());
@@ -40,6 +40,17 @@ public class TweetArrayAdapter extends ArrayAdapter<Tweet> {
 			v = convertView;
 		}
 		ImageView ivProfileImage = (ImageView) v.findViewById(R.id.ivProfileImage);
+		
+		ivProfileImage.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Intent i = new Intent(getContext(), ProfileActivity.class);
+				i.putExtra("user", tweet.getUser());
+				getContext().startActivity(i);
+			}
+		});
+
 		TextView tvUserScreenName = (TextView) v.findViewById(R.id.tvUserScreenName);
 		TextView tvBody = (TextView) v.findViewById(R.id.tvBody);
 		tvRelativeTime = (TextView) v.findViewById(R.id.tvRelativeTime);
@@ -52,18 +63,20 @@ public class TweetArrayAdapter extends ArrayAdapter<Tweet> {
 		tvUserScreenName.setText("@"+tweet.getUser().getScreenName());
 		tvUserName.setText(tweet.getUser().getName() + "  ");
 		tvBody.setText(tweet.getBody());
-		//uncomment getRelativeTime(tweet.getCreatedAt());
+		getRelativeTime(tweet.getCreatedAt());
+		//tvRelativeTime.setText(tweet.getRelativeTimeAgo());
 		
 		return v;
 	}
 
-	private void getRelativeTime(Date createdAt) {
-		//try {
+	private void getRelativeTime(String createdAt) {
+		try {
+			Date date = simpleDateFormat.parse(createdAt);
 			long currentTime = System.currentTimeMillis();
-			long diff = currentTime - createdAt.getTime();
+			long diff = currentTime - date.getTime();
 			if (diff > 0) {
 				int time = (int) (diff / 1000);
-				String t = simpleDateFormat.format(createdAt);
+				String t = createdAt;
 
 				if (time < 60) {
 					t = String.valueOf(time) + "s";
@@ -74,7 +87,7 @@ public class TweetArrayAdapter extends ArrayAdapter<Tweet> {
 				} else if (time < 60 * 60 * 24 * 10) {
 					t = String.valueOf(time / (3600 * 24)) + "d";
 				} else {
-					long millis = createdAt.getTime();
+					long millis = date.getTime();
 					t = DateUtils.getRelativeTimeSpanString(millis,
 							System.currentTimeMillis(),
 							DateUtils.SECOND_IN_MILLIS).toString();
@@ -84,9 +97,9 @@ public class TweetArrayAdapter extends ArrayAdapter<Tweet> {
 				tvRelativeTime.setText("Now");
 			}
 
-		//} catch (ParseException e) {
-			//Log.d("twit", e.getMessage());
-		//}
+		} catch (ParseException e) {
+			Log.d("twit", e.getMessage());
+		}
 	}
 	
 }

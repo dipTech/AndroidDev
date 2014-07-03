@@ -141,7 +141,7 @@
 
     <fragment
         android:id="@+id/fragment1"
-        android:name="com.codepath.apps.basictwitter.fragments.TweetsListFragment"
+        android:name="com.codepath.apps.basictwitter.fragments.UserTimelineFragment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"

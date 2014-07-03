@@ -20,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.codepath.apps.basictwitter.models.Tweet;
+import com.codepath.apps.basictwitter.util.TweetUtility;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
@@ -50,7 +51,11 @@ public class TweetDetailActivity extends Activity {
 		
 		Button replyB = (Button) findViewById(R.id.dvReplyB);
 		Button deleteB = (Button) findViewById(R.id.dvDeleteB);
-		Button retweetB = (Button) findViewById(R.id.dvReyweetB);
+		Button retweetB = (Button) findViewById(R.id.dvRetweetB);
+		
+		TextView tvretweets = (TextView) findViewById(R.id.tv_RTcount);
+		TextView tvfavorites = (TextView) findViewById(R.id.tv_FavoriteCount);
+		TextView tvfollowers = (TextView) findViewById(R.id.tv_FollowCount);
 		
 		ImageView imgView = (ImageView) findViewById(R.id.dvImgView);
 		imgView.setImageResource(android.R.color.transparent);
@@ -64,6 +69,11 @@ public class TweetDetailActivity extends Activity {
 		deleteB.setBackgroundResource(R.drawable.ic_delete);
 		retweetB.setBackgroundResource(R.drawable.ic_retweet);
 
+		tvretweets.setText(TweetUtility.formatForDisplay(result.getRetweet_count()));
+		//Toast.makeText(this, "Favorite:" + TweetUtility.formatForDisplay(result.getUser().getFollowers_count()), Toast.LENGTH_LONG).show();
+		tvfavorites.setText(TweetUtility.formatForDisplay(result.getUser().getFavourites_count()));
+		tvfollowers.setText(TweetUtility.formatForDisplay(result.getUser().getFollowers_count()));
+				
 		try {
 			Date d = sf.parse(result.getCreatedAt());
 			creT.setText(sf_d.format(d));
@@ -99,7 +109,6 @@ public class TweetDetailActivity extends Activity {
 			
 			@Override
 			public void onClick(View v) {
-				Log.d("twit", "retweet: ");
 				reTweet(String.valueOf(result.getUid()));		
 			}
 		});

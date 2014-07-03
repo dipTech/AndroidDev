@@ -18,8 +18,10 @@
     <string name="userscreenname">Name</string>
     <string name="facebook_desc">Connect with Facebook</string>
     <string name="reply_button_label">Reply</string>
-    <string name="retweet_button_label">Re-tweet</string>
+    <string name="retweet_button_label">Retweet</string>
     <string name="favorite_button_label">Favorite</string>
+    <string name="followers_button_label">Followers</string>
+    <string name="following_button_label">Following</string>
     <string name="why_not_email_title">Why not email?</string>
     <string name="search">Search</string>
     <string name="no_network_connection">No network connection</string>

@@ -155,7 +155,7 @@ public class TweetClickDialog extends DialogFragment {
     	    imageLoader.displayImage(tweet.getMediaUrl(), ivEmbedImage);
          }
 
-        tvRetweetCount.setText("Retweets " + tweet.getRetweetCount());
+        tvRetweetCount.setText("Retweets " + TweetUtility.formatForDisplay(tweet.getRetweet_count()));
 
         /* dipu 
 		tmpFav = tweet.getFavorited();
