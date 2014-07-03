@@ -21,6 +21,9 @@
     <string name="retweet_button_label">Re-tweet</string>
     <string name="favorite_button_label">Favorite</string>
     <string name="why_not_email_title">Why not email?</string>
+    <string name="search">Search</string>
+    <string name="no_network_connection">No network connection</string>
+    <string name="tweet">Tweet</string>
     <string name="login_body">
 <![CDATA[
         Highlight is based on real identity and mutual friends. 
@@ -39,5 +42,7 @@
     <string name="title_activity_tweet_auto_link">TweetAutoLink</string>
     <string name="title_activity_tweets">TweetsActivity</string>
     <string name="title_activity_profile">ProfileActivity</string>
+    <string name="title_activity_add_tweet">AddTweet</string>
+    <string name="title_activity_tweet_detail">TweetDetailActivity</string>
 
 </resources>

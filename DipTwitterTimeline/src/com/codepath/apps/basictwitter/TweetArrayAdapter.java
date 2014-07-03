@@ -7,11 +7,13 @@ import java.util.List;
 import java.util.Locale;
 
 import android.content.Context;
+import android.content.Intent;
 import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -51,6 +53,7 @@ public class TweetArrayAdapter extends ArrayAdapter<Tweet> {
 		tvUserName.setText(tweet.getUser().getName() + "  ");
 		tvBody.setText(tweet.getBody());
 		//uncomment getRelativeTime(tweet.getCreatedAt());
+		
 		return v;
 	}
 

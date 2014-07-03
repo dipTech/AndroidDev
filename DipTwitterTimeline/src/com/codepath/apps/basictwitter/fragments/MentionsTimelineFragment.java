@@ -1,8 +1,10 @@
 package com.codepath.apps.basictwitter.fragments;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.json.JSONArray;
+import org.json.JSONObject;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -30,9 +32,25 @@ public class MentionsTimelineFragment extends TweetsListFragment {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		client = TwitterApplication.getRestClient();
-		populateTimeline();
 		// dipu setupViews();
-		// dipu populateTimeline();
+		populateTimeline();
+	}
+
+	public void fetchMentionsTimeLine(final int page, long l) {
+
+		getActivity().setProgressBarIndeterminateVisibility(true);
+		client.getHomeTimelineSinceId(l, new JsonHttpResponseHandler() {
+			@Override
+			public void onSuccess(int code, JSONArray body) {
+				jsonHandlerSuccessFunction(page, body);
+			}
+
+			@Override
+			public void onFailure(Throwable e, JSONObject error) {
+				// Handle the failure and alert the user to retry
+				jsonHandlerFailureFunction(e.getLocalizedMessage());
+			}
+		});
 	}
 	
 	public void populateTimeline() {
@@ -95,7 +113,7 @@ public class MentionsTimelineFragment extends TweetsListFragment {
 	}
 	
 	public void populateTimelineMaxId(long offset) {
-		client.getMentionsTimeline(offset, new JsonHttpResponseHandler() {
+		client.getMentionsTimelineMaxId(offset, new JsonHttpResponseHandler() {
 
 			@Override
 			public void onFailure(Throwable e, String s) {
@@ -108,6 +126,78 @@ public class MentionsTimelineFragment extends TweetsListFragment {
 				List<Tweet> sinceTweet = Tweet.fromJSONArray(json);
 				//tweets.addAll(0, sinceTweet);
 				//aTweets.notifyDataSetChanged();
+			}
+		});
+	}
+	
+	
+	
+	
+	
+	public void populateTimeLine() {
+		showProgressBar();
+		client.getMentionsTimeline(new JsonHttpResponseHandler(){
+			
+			@Override
+			public void onSuccess(JSONArray jsonArray) {				
+				clearAdapter();
+				clearDB();				
+				addAll(Tweet.fromJSONArray(jsonArray,""));
+			}
+			
+			@Override
+			public void onFailure(Throwable e, String s) {
+				Toast.makeText(context, "Load from database failed", Toast.LENGTH_SHORT).show();
+				populateHomeLineFromDB();
+			}
+			
+			@Override
+			public void onFinish() {
+				super.onFinish();
+				clearProgressBar();
+			}
+		});		
+	}
+
+	@Override
+	public void populateTimeLineSinceLatest(String uid) {
+		Log.d("twit", "add all "+ uid);
+		client.getMentionsTimelineSinceId(Long.valueOf(uid), new JsonHttpResponseHandler(){
+
+			@Override
+			public void onSuccess(JSONArray jsonArray) {
+				Log.d("twit", "mention refresh "+jsonArray.length());
+				ArrayList<Tweet> latestT = Tweet.fromJSONArray(jsonArray,"");
+				Log.d("twit", "mention refresh "+latestT.size());
+				addLatestTweets(latestT);
+			}
+
+			@Override
+			public void onFailure(Throwable e, String s) {
+				Toast.makeText(context, "Tweet retreive failed", Toast.LENGTH_SHORT).show();
+			}
+
+			@Override
+			public void onFinish() {
+				lvTweets.onRefreshComplete();
+				super.onFinish();
+			}
+		});
+
+	}
+
+	@Override
+	public void loadMore(final String maxId) {
+		client.getMentionsTimelineMaxId(Long.valueOf(maxId), new JsonHttpResponseHandler(){
+
+			@Override
+			public void onSuccess(JSONArray jsonArray) {
+				addAll(Tweet.fromJSONArray(jsonArray, maxId));						
+			}
+
+			@Override
+			public void onFailure(Throwable e, String s) {
+				Toast.makeText(context, "Tweet retreive failed", Toast.LENGTH_SHORT).show();
 			}
 		});
 	}

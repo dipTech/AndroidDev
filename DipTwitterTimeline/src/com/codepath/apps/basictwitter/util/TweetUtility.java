@@ -22,6 +22,7 @@ public class TweetUtility extends Activity { // extends Activity to get the Conn
 	private static final String TWITTER = "EEE MMM dd HH:mm:ss ZZZZZ yyyy";
 	public static final boolean DEBUG = false;
 	public static User defaultUser; // default user of the application
+	public static int TWEET_REQUEST_CODE = 11;
 
 	public static void showSoftKeyboard(View view,Activity activity){
 	    if(view.requestFocus()){
@@ -80,9 +81,10 @@ public class TweetUtility extends Activity { // extends Activity to get the Conn
 	private static void setProgressBarVisibility(Activity activity,boolean show) {
 		activity.setProgressBarIndeterminate(show);
 	}
-	public static Boolean isNetworkAvailable(Activity activity) {
+	
+	public static Boolean isNetworkAvailable(Context context) {
 		ConnectivityManager connectivityManager 
-        = (ConnectivityManager) activity.getSystemService(Context.CONNECTIVITY_SERVICE);
+        = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
 		
 		boolean isNetworkAvailable=true;
 	    NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
@@ -101,6 +103,12 @@ public class TweetUtility extends Activity { // extends Activity to get the Conn
 			}
 		}
 		return maxSinceId;
+	}
+
+	public static String formatForDisplay(long count) {
+	    if (count < 1000) return "" + count;
+	    int exp = (int) (Math.log(count) / Math.log(1000));
+	    return String.format("%.1f %c", count / Math.pow(1000, exp), "KMGTPE".charAt(exp-1));
 	}
 
 	public static Date getTwitterDate(String date) {

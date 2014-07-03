@@ -43,7 +43,24 @@ public class HomeTimelineFragment extends TweetsListFragment {
 		//setupViews();
 	}
 	
-	/*
+	public void fetchHomeTimeLine(final int page, long l) {
+
+		getActivity().setProgressBarIndeterminateVisibility(true);
+		client.getHomeTimelineSinceId(l, new JsonHttpResponseHandler() {
+			@Override
+			public void onSuccess(int code, JSONArray body) {
+				jsonHandlerSuccessFunction(page, body);
+			}
+
+			@Override
+			public void onFailure(Throwable e, JSONObject error) {
+				// Handle the failure and alert the user to retry
+				jsonHandlerFailureFunction(e.getLocalizedMessage());
+			}
+		});
+	}
+
+		/*
 	protected void customLoadMoreData(long since_id, long max_id, int totalItemsCount) {
 		if(TweetUtility.isNetworkAvailable(getActivity()) ) {
 
@@ -162,12 +179,39 @@ public class HomeTimelineFragment extends TweetsListFragment {
 				}
 			}
 			
+			@Override
 			public void onFailure(Throwable e, String s) {
 				Log.d("debug", e.toString());
 				Log.d("debug", s.toString());
 				showToast("Unidentified User....");
 			}
 			
+		});
+	}
+
+	public void populateTimeLine(){		
+		
+		client.getHomeTimeline(new JsonHttpResponseHandler(){
+			
+			@Override
+			public void onSuccess(JSONArray jsonArray) {				
+				clearAdapter();
+				clearDB();				
+				addAll(Tweet.fromJSONArray(jsonArray,""));
+				
+			}
+			
+			@Override
+			public void onFailure(Throwable e, String s) {
+				// dipu Toast.makeText(getActivity(), "Connection error..loading from database", Toast.LENGTH_SHORT).show();
+				populateHomeLineFromDB();
+			}
+			
+			@Override
+			public void onFinish() {
+				super.onFinish();
+				clearProgressBar();
+			}
 		});
 	}
 

@@ -3,10 +3,7 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@color/LightSteelBlue"
     tools:context="com.codepath.apps.basictwitter.ProfileActivity"
     tools:ignore="MergeRootFrame" >
 
@@ -23,10 +20,7 @@
             android:layout_height="75dp"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
-            android:layout_marginRight="10dp"
-            android:contentDescription="nothing"
-            android:src="@drawable/facebook_connect" />
-
+            android:layout_marginRight="10dp"/>
         <TextView
             android:id="@+id/tvName"
             android:layout_width="wrap_content"
@@ -36,45 +30,125 @@
             android:textSize="16sp" />
 
         <TextView
-            android:id="@+id/tvTagline"
+            android:id="@+id/tvUserScreenName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignLeft="@+id/tvName"
             android:layout_below="@+id/tvName"
-            android:text="Tagline"
+            android:text="Screen Name"
             android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/tvDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/tvName"
+            android:layout_below="@+id/tvUserScreenName"
+            android:text="Description"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
     </RelativeLayout>
 
     <LinearLayout
-        android:id="@+id/llCount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/llStats"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignLeft="@+id/rlHeader"
         android:layout_below="@+id/rlHeader"
-        android:layout_marginBottom="10dp"
-        android:orientation="horizontal" >
+        android:orientation="horizontal"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        android:weightSum="3" >
 
-        <TextView
-            android:id="@+id/tvFollowers"
+        <LinearLayout
+            android:id="@+id/llTwtStats"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/tvName"
-            android:text="5 Followers" />
+            android:layout_gravity="left"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            android:background="?android:attr/selectableItemBackground"
+            android:clickable="true"
+            android:orientation="vertical" >
 
-        <TextView
-            android:id="@+id/tvFollowing"
+            <TextView
+                android:id="@+id/tvTweets"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvTweetsLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="2dp"
+                android:text="Tweets"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llFollowing"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/tvName"
-            android:text="5 Following" />
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:background="?android:attr/selectableItemBackground"
+            android:clickable="true"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/tvFollowing"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvFollowingLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="2dp"
+                android:text="Following"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llFollowers"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_weight="1"
+            android:background="?android:attr/selectableItemBackground"
+            android:clickable="true"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/tvFollowers"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvFollowersLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="2dp"
+                android:text="Followers"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
+        </LinearLayout>
     </LinearLayout>
 
     <fragment
-        android:id="@+id/fragmentUserTimeline"
-        android:name="com.codepath.apps.basictwitter.fragments.UserTimelineFragment"
+        android:id="@+id/fragment1"
+        android:name="com.codepath.apps.basictwitter.fragments.TweetsListFragment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/llStats"
+        android:layout_marginTop="17dp"
         tools:layout="@layout/fragment_tweets_list" />
 
 </RelativeLayout>

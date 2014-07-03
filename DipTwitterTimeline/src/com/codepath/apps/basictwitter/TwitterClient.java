@@ -1,5 +1,7 @@
 package com.codepath.apps.basictwitter;
 
+import java.io.ByteArrayInputStream;
+
 import org.scribe.builder.api.Api;
 import org.scribe.builder.api.TwitterApi;
 
@@ -47,7 +49,7 @@ public class TwitterClient extends OAuthBaseClient {
     	}
     }
     
-    public void getHomeTimeline(long sinceId, AsyncHttpResponseHandler handler) {
+    public void getHomeTimelineSinceId(long sinceId, AsyncHttpResponseHandler handler) {
     	String apiUrl = getApiUrl("statuses/home_timeline.json");
     	RequestParams params = new RequestParams();
     	params.put("since_id", String.valueOf(sinceId));
@@ -88,11 +90,21 @@ public class TwitterClient extends OAuthBaseClient {
     	client.get(apiUrl, null, handler);
     }
 
-	public void getMentionsTimeline(long offset, JsonHttpResponseHandler handler) {
+	public void getMentionsTimelineMaxId(long offset, JsonHttpResponseHandler handler) {
     	String apiUrl = getApiUrl("statuses/mentions_timeline.json");
     	RequestParams params = new RequestParams();
     	if (offset > 0) {
     		params.put("max_id", String.valueOf(offset));
+    	}
+		//params.put("count", String.valueOf(REC_COUNT));
+    	client.get(apiUrl, params, handler);		
+	}
+    
+	public void getMentionsTimelineSinceId(long offset, JsonHttpResponseHandler handler) {
+    	String apiUrl = getApiUrl("statuses/mentions_timeline.json");
+    	RequestParams params = new RequestParams();
+    	if (offset > 0) {
+    		params.put("since_id", String.valueOf(offset));
     	}
 		//params.put("count", String.valueOf(REC_COUNT));
     	client.get(apiUrl, params, handler);		
@@ -108,4 +120,41 @@ public class TwitterClient extends OAuthBaseClient {
     	String apiUrl = getApiUrl("statuses/user_timeline.json");
         client.get(apiUrl, null, handler);    	
     }
+    
+	public void postTweet(String content, String inReplyTo,
+			ByteArrayInputStream image, AsyncHttpResponseHandler handler) {
+		String apiUrl;
+		RequestParams params = new RequestParams();
+
+		// 64 bit encoding not required
+		if (image != null) {
+			apiUrl = getApiUrl("statuses/update_with_media.json");
+			params.put("media[]", image);
+		} else {
+			apiUrl = getApiUrl("statuses/update.json");
+		}
+		params.put("status", content);
+		if (inReplyTo != null) {
+			params.put("in_reply_to_status_id", content);
+		}
+		getClient().post(apiUrl, params, handler);
+	}
+	
+	public void deleteTweet(AsyncHttpResponseHandler handler, String statusId){
+		String url = getApiUrl("statuses/destroy/"+statusId+".json");
+		client.post(url, handler);
+	}
+
+	public void reTweet(AsyncHttpResponseHandler handler, String statusId){
+		String url = getApiUrl("statuses/retweet/"+statusId+".json");
+		client.post(url, handler);
+	}
+	
+	public void replyTweet(AsyncHttpResponseHandler handler, String msg, String statusId){
+		String url = getApiUrl("statuses/update.json");
+		RequestParams params = new RequestParams();
+		params.put("status", msg);
+		params.put("in_reply_to_status_id", statusId);
+		client.post(url, params, handler);
+	}
 }

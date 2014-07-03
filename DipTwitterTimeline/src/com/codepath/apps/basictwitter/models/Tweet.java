@@ -29,26 +29,25 @@ public class Tweet extends Model implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
+	@Column(name = "tweet_id")
+	private long tweetId;
+	@Column(name = "name")
+	private String name;
+	@Column(name = "handle")
+	private String handle;
 	@Column(name = "body")
 	private String body;
+	@Column(name = "content")
+	private String content;
+
 	@Column(name = "uid", unique = true, onUniqueConflict = Column.ConflictAction.REPLACE)
 	private long uid;
-    public static SimpleDateFormat getSimpledateformat() {
-		return simpleDateFormat;
-	}
-
-	public int getRetweetCount() {
-		return retweetCount;
-	}
-
-	public boolean isFavorited() {
-		return favorited;
-	}
-
-	public String getMediaUrl() {
-		return mediaUrl;
-	}
-
+	@Column(name = "retweet_count")
+	private int retweet_count;
+	@Column(name = "favourites_count")
+	private int favourites_count;
+	@Column(name = "retweeted")
+	private boolean retweeted;
 	@Column(name = "retweetCount")
 	private int retweetCount;
     @Column(name = "favorited")
@@ -80,6 +79,9 @@ public class Tweet extends Model implements Serializable {
 		Tweet tweet = new Tweet();
 		// extract values from json to populate the member variables
 		try {
+            tweet.name = json.getJSONObject("user").getString("name");
+            tweet.handle = "@" + json.getJSONObject("user").getString("screen_name");
+            tweet.tweetId = json.getLong("id");
 			tweet.body = json.getString("text");
 			tweet.uid = json.getLong("id");
 			tweet.createdAt = json.getString("created_at");
@@ -123,6 +125,52 @@ public class Tweet extends Model implements Serializable {
 		return tweets;
 	}
 	
+	public static ArrayList<Tweet> fromJSONArray(JSONArray jsonArray, String maxId){
+		ArrayList<Tweet> tweetResults = new ArrayList<Tweet>();
+		for(int i=0; i< jsonArray.length(); i++){
+			JSONObject json = null;
+			try {
+				json = jsonArray.getJSONObject(i);
+			}catch (JSONException e) {
+				continue;
+			}
+
+			if(json!=null){				
+				if(maxId.isEmpty())
+					tweetResults.add(Tweet.fromJSON(json));
+				else{
+					Tweet t = Tweet.fromJSON(json, false);
+					if(!String.valueOf(t.getUid()).equals(maxId))
+						tweetResults.add(t);
+				}
+			}
+			
+		}
+		return tweetResults;
+	}
+	
+	public static Tweet fromJSON(JSONObject jsonObj, boolean persistInDb){
+		Tweet tweet = new Tweet();
+		
+		try {
+			tweet.body = jsonObj.getString("text");
+			tweet.createdAt = jsonObj.getString("created_at");
+			tweet.uid = jsonObj.getLong("id");
+			tweet.user = User.fromJSON(jsonObj.getJSONObject("user"));
+			tweet.userId = tweet.user.getUid();
+			if(persistInDb){
+				tweet.user.save();
+				tweet.save();
+			}
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return tweet;
+		
+	}
+	
+
 	public static List<Tweet> findAll() {
 		return new Select().from(Tweet.class).orderBy("uid DESC").execute();
 	}
@@ -172,6 +220,38 @@ public class Tweet extends Model implements Serializable {
 		return userId;
 	}
 
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setHandle(String handle) {
+		this.handle = handle;
+	}
+
+	public void setRetweetCount(int retweetCount) {
+		this.retweetCount = retweetCount;
+	}
+
+	public void setFavorited(boolean favorited) {
+		this.favorited = favorited;
+	}
+
+	public void setMediaUrl(String mediaUrl) {
+		this.mediaUrl = mediaUrl;
+	}
+
+	public void setUserId(Long userId) {
+		this.userId = userId;
+	}
+
 	public String getRelativeTimeAgo() {
 		String twitterFormat = "EEE MMM dd HH:mm:ss ZZZZZ yyyy";
 		SimpleDateFormat sf = new SimpleDateFormat(twitterFormat, Locale.ENGLISH);
@@ -189,6 +269,11 @@ public class Tweet extends Model implements Serializable {
 		return relativeDate;
 	}
 	
+	public static Tweet getTweetById(long tweetId){
+		return (Tweet) new Select().from(Tweet.class).where("tweet_id", tweetId).execute();
+	}
+	
+
 	public static Tweet findById(Long id){
 		return new Select().from(Tweet.class).where("uid = ?", id).executeSingle();
 	}
@@ -206,4 +291,60 @@ public class Tweet extends Model implements Serializable {
 			ActiveAndroid.endTransaction();
 		}
 	}
+	
+	public long getTweetId() {
+		return tweetId;
+	}
+	public void setTweetId(long id) {
+		this.tweetId = id;
+	}
+
+	public int getRetweetCount() {
+		return retweetCount;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public String getHandle() {
+		return handle;
+	}
+
+	public boolean isFavorited() {
+		return favorited;
+	}
+
+	public String getMediaUrl() {
+		return mediaUrl;
+	}
+
+    public static SimpleDateFormat getSimpledateformat() {
+		return simpleDateFormat;
+	}
+
+	public int getRetweet_count() {
+		return retweet_count;
+	}
+
+	public void setRetweet_count(int retweet_count) {
+		this.retweet_count = retweet_count;
+	}
+
+	public int getFavourites_count() {
+		return favourites_count;
+	}
+
+	public void setFavourites_count(int favourites_count) {
+		this.favourites_count = favourites_count;
+	}
+
+	public boolean isRetweeted() {
+		return retweeted;
+	}
+
+	public void setRetweeted(boolean retweeted) {
+		this.retweeted = retweeted;
+	}
+
 }
