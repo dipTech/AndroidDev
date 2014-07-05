@@ -5,6 +5,7 @@ import java.util.List;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Toast;
 
 import com.codepath.healthpact.R;
@@ -64,12 +65,5 @@ public class ParseStarterProjectActivity extends Activity {
 		// or for a more robust offline save
 		// todoItem.saveEventually();
 	}
-	
-	public void queryData() {
-		// Define the class we would like to query
-		ParseQuery<AppUser> query = ParseQuery.getQuery(AppUser.class);
-		// Define our query conditions
-		//query.whereEqualTo("owner", ParseUser.getCurrentUser());
-		query.whereEqualTo("name", "dipankar");
-	}
+
 }

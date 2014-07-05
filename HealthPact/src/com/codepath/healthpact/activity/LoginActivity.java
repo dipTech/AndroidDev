@@ -1,5 +1,7 @@
 package com.codepath.healthpact.activity;
 
+import java.util.List;
+
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -7,10 +9,14 @@ import android.widget.Toast;
 
 import com.codepath.healthpact.R;
 import com.codepath.healthpact.app.HealthPactApp;
+import com.codepath.healthpact.models.AppUser;
 import com.codepath.healthpact.restclient.RestClient;
 import com.codepath.oauth.OAuthLoginActivity;
+import com.parse.FindCallback;
 import com.parse.LogInCallback;
 import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
 public class LoginActivity extends OAuthLoginActivity<RestClient> {
@@ -66,4 +72,20 @@ public class LoginActivity extends OAuthLoginActivity<RestClient> {
 				});
 	}
 	
+	public void queryData(View v) {
+		// Define the class we would like to query
+		ParseQuery<AppUser> query = ParseQuery.getQuery(AppUser.class);
+		query.whereEqualTo("name", "Test");
+		query.findInBackground(new FindCallback<AppUser>() {
+
+			@Override
+			public void done(List<AppUser> results, ParseException e) {
+				for (AppUser u : results) {
+					Toast.makeText(getApplicationContext(), u.getExpertise() +  "-" + u.getDescription(), Toast.LENGTH_SHORT).show();
+					break;
+				}
+			}
+		});
+	}
+
 }

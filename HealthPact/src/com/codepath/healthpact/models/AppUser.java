@@ -24,7 +24,6 @@ public class AppUser extends ParseObject {
 		super();
 		
 		setName(name);
-		/*
 		setPassword(passwd);
 		setExpertise(expertise);
 		setLocationId(location_id);
@@ -32,7 +31,7 @@ public class AppUser extends ParseObject {
 		setPostDate(post_date);
 		setUpdateDate(update_date);
 		setPlanCreated(plan_created);
-		*/
+
 	}
 
 	public void setPlanCreated(boolean isPlanCreated) {
@@ -43,7 +42,7 @@ public class AppUser extends ParseObject {
 		return getBoolean("isPlanCreated");
 	}
 
-	private void setUpdateDate(Date update_date) {
+	public void setUpdateDate(Date update_date) {
 		put("update_date", update_date);
 
 	}
@@ -63,12 +62,12 @@ public class AppUser extends ParseObject {
 	}
 
 	public void setDescription(String desc) {
-		put("description", desc);
+		put("user_description", desc);
 
 	}
 	
 	public String getDescription() {
-		return getString("passwd");
+		return getString("user_description");
 	}
 
 	public void setLocationId(long locationId) {

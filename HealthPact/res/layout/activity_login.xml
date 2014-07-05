@@ -9,11 +9,21 @@
     tools:context=".LoginActivity" >
 
     <Button
+        android:id="@+id/button2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_margin="20dp"
         android:onClick="parseLogin"
         android:text="@string/login_label" />
+
+    <Button
+        android:id="@+id/btnQuery"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/button2"
+        android:layout_centerHorizontal="true"
+        android:text="Query"
+        android:onClick="queryData" />
 
 </RelativeLayout>

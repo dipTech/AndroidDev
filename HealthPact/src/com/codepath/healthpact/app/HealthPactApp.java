@@ -45,6 +45,7 @@ public class HealthPactApp extends com.activeandroid.app.Application {
         parseInit();
         parseSignUp();
         //parseLogin(strUser, strPwd);
+        registerParseAppTables();
         
         // Create global configuration and initialize ImageLoader with this configuration
         DisplayImageOptions defaultOptions = new DisplayImageOptions.Builder().
