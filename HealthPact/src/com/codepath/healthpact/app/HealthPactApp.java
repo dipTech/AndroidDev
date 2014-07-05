@@ -31,15 +31,20 @@ import com.parse.SignUpCallback;
 public class HealthPactApp extends com.activeandroid.app.Application {
 	private static Context context;
 	public static ParseUser currentUser;	// to hold the current user
-	private String strUser = "aravind";
-	private String strPwd = "aravinda";
-	private String strEmailAddress = "dipankar14@gmail.com";
+	public static String strUser = "dipankar";
+	public static String strPwd = "aravinda";
+	public static String strEmailAddress = "dipankar14@gmail.com";
 
 
     @Override
     public void onCreate() {
         super.onCreate();
         HealthPactApp.context = this;
+        
+        // Parse initialize
+        parseInit();
+        parseSignUp();
+        //parseLogin(strUser, strPwd);
         
         // Create global configuration and initialize ImageLoader with this configuration
         DisplayImageOptions defaultOptions = new DisplayImageOptions.Builder().
@@ -89,20 +94,6 @@ public class HealthPactApp extends com.activeandroid.app.Application {
 				}
 			}
 		});
-	}
-	
-	public void parseLogin(String strUser, String strPwd) {
-		ParseUser.logInInBackground(strUser, strPwd, new LogInCallback() {
-
-					public void done(ParseUser user, ParseException e) {
-						if (user != null) {
-							Toast.makeText(getApplicationContext(), "Logged in", Toast.LENGTH_SHORT).show();
-						} else {
-							// Signup failed. Look at the ParseException to see
-							// what happened.
-						}
-					}
-				});
 	}
 	
 	private void registerParseAppTables() {

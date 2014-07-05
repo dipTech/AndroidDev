@@ -18,7 +18,6 @@ import com.parse.ParseUser;
 
 
 public class ParseStarterProjectActivity extends Activity {
-	public Context context;
 	
 	/** Called when the activity is first created. */
 	public void onCreate(Bundle savedInstanceState) {
@@ -35,7 +34,6 @@ public class ParseStarterProjectActivity extends Activity {
 	}
 
 	private void init() {
-		context = getApplicationContext();		
 	}
 
 	private void setParseModel() {
